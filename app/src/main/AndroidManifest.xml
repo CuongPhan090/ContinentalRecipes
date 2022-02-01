@@ -8,9 +8,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MealRecipe">
+        android:theme="@style/Theme.MealRecipe.NoActionBarAndStatusBar">
         <activity
-            android:name=".view.HomePage"
+            android:name=".view.category.CategoryView"
             android:exported="false" />
         <activity
             android:name=".view.SplashScreen"

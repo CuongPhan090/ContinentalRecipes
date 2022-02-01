@@ -4,4 +4,9 @@
     <dimen name="button_right_margin">48dp</dimen>
     <dimen name="button_bottom_margin">56dp</dimen>
     <dimen name="button_corner_radius">5dp</dimen>
+    <dimen name="logo_bottom_offset">82dp</dimen>
+    <dimen name="category_name">24sp</dimen>
+    <dimen name="duration">24sp</dimen>
+    <dimen name="duration_margin">8dp</dimen>
+    <dimen name="clock_icon_margin">4dp</dimen>
 </resources>
