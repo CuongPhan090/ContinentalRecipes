@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.mealrecipe.databinding.CategoryViewHolderBinding
 import com.example.mealrecipe.model.Category
 
-class CategoryAdapter(): ListAdapter<Category, CategoryViewHolder>(CategoryDiffCallback()){
+class CategoryAdapter: ListAdapter<Category, CategoryViewHolder>(CategoryDiffCallback()){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         return CategoryViewHolder(CategoryViewHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
