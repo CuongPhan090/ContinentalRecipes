@@ -24,7 +24,7 @@ class CategoryView : AppCompatActivity() {
         binding.categoryRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.categoryRecyclerView.adapter = adapter
 
-        // create some dummy data and submit the list
+        // create some dummy data
         val categoryList = listOf(
             Category("1","Beef", "https://www.themealdb.com/images/category/beef.png"),
             Category("2","Pork", "https://www.themealdb.com/images/category/pork.png"),
