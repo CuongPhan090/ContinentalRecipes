@@ -2,6 +2,7 @@ package com.example.mealrecipe.view.category
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mealrecipe.R
 import com.example.mealrecipe.databinding.ActivityCategoryBinding
@@ -20,11 +21,13 @@ class CategoryView : AppCompatActivity() {
     }
 
     private fun configureCategoryView() {
-        adapter = CategoryAdapter()
+        adapter = CategoryAdapter { category ->
+            Toast.makeText(this, "$category", Toast.LENGTH_LONG).show()
+        }
         binding.categoryRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.categoryRecyclerView.adapter = adapter
 
-        // create some dummy data and submit the list
+        // create some dummy data
         val categoryList = listOf(
             Category("1","Beef", "https://www.themealdb.com/images/category/beef.png"),
             Category("2","Pork", "https://www.themealdb.com/images/category/pork.png"),

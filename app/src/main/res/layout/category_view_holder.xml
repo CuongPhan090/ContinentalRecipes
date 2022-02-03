@@ -27,6 +27,6 @@
             android:textColor="@color/white"
             android:textSize="@dimen/category_name"
             android:textStyle="bold"
-            tools:text="Walnut rosemary crusted salmon" />
+            tools:text="Beef" />
     </FrameLayout>
 </androidx.cardview.widget.CardView>
