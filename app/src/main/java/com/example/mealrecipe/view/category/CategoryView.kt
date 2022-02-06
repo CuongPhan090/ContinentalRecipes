@@ -18,13 +18,17 @@ class CategoryView : AppCompatActivity() {
         binding = ActivityCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
         categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel::class.java)
+        // who is calling this view model function
         categoryViewModel.getCategory()
         configureCategoryView()
     }
 
     private fun configureCategoryView() {
-        adapter = CategoryAdapter {
-            startActivity(Intent(this, MealView::class.java))
+        // need to refactor this click handling
+        adapter = CategoryAdapter { categoryDetail ->
+            startActivity(Intent(this, MealView::class.java).also {
+                it.putExtra("category", categoryDetail)
+            })
         }
 
         binding.categoryRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -33,5 +37,6 @@ class CategoryView : AppCompatActivity() {
         categoryViewModel.category.observe(this) {
             adapter.submitList(it.categories)
         }
+
     }
 }

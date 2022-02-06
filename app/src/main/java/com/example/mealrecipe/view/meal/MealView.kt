@@ -2,9 +2,11 @@ package com.example.mealrecipe.view.meal
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mealrecipe.R
 import com.example.mealrecipe.databinding.ActivityMealViewBinding
+import com.example.mealrecipe.model.CategoryDetail
 import com.example.mealrecipe.model.Meal
 
 class MealView : AppCompatActivity() {
@@ -20,9 +22,11 @@ class MealView : AppCompatActivity() {
     }
 
     private fun configureMeal() {
+        val selectedCategory = intent.getParcelableExtra<CategoryDetail>("category")
         adapter = MealAdapter()
         binding.mealRecyclerView.adapter = adapter
         binding.mealRecyclerView.layoutManager = LinearLayoutManager(this)
+        Toast.makeText(this, "$selectedCategory", Toast.LENGTH_LONG).show()
 
         // Create some dummy list
         val meals = listOf(
