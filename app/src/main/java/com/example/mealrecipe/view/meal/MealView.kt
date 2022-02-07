@@ -28,13 +28,6 @@ class MealView : AppCompatActivity() {
         binding.mealRecyclerView.layoutManager = LinearLayoutManager(this)
         Toast.makeText(this, "$selectedCategory", Toast.LENGTH_LONG).show()
 
-        // Create some dummy list
-        val meals = listOf(
-            Meal("1", "Kapsalon", "https://www.themealdb.com/images/media/meals/sxysrt1468240488.jpg"),
-            Meal("1", "Kapsalon", "https://www.themealdb.com/images/media/meals/sxysrt1468240488.jpg"),
-            Meal("1", "Kapsalon", "https://www.themealdb.com/images/media/meals/sxysrt1468240488.jpg"),
-            Meal("1", "Kapsalon", "https://www.themealdb.com/images/media/meals/sxysrt1468240488.jpg")
-        )
-        adapter.submitList(meals)
+       // adapter.submitList()
     }
 }

@@ -2,24 +2,25 @@ package com.example.mealrecipe.view.category
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mealrecipe.databinding.ActivityCategoryBinding
+import com.example.mealrecipe.model.Meal
+import com.example.mealrecipe.network.ApiClient
+import com.example.mealrecipe.repository.MealRepository
 import com.example.mealrecipe.view.meal.MealView
 
-class CategoryView : AppCompatActivity() {
+class CategoryView() : AppCompatActivity() {
     lateinit var binding: ActivityCategoryBinding
-    lateinit var categoryViewModel: CategoryViewModel
     lateinit var adapter: CategoryAdapter
-
+    private val categoryViewModel: CategoryViewModel by viewModels { CategoryViewModelFactory(MealRepository()) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel::class.java)
-        // who is calling this view model function
-        categoryViewModel.getCategory()
         configureCategoryView()
     }
 

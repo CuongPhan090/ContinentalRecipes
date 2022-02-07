@@ -1,9 +1,11 @@
 package com.example.mealrecipe.repository
 
-//class MealRepository(
-//    val remoteDatabase: RemoteDatabase,
-//    val localDatabase: LocalDatabase
-//) {
-//    fun getCategory()
-//
-//}
+import com.example.mealrecipe.network.ApiService
+
+class MealRepository {
+    private val remoteDatabase = ApiService.categoryApi
+
+    suspend fun getCategory() = remoteDatabase.getCategory()
+
+//    suspend fun getMeal() = remoteDatabase.getMeal()
+}
