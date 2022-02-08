@@ -2,16 +2,18 @@ package com.example.mealrecipe.view.meal
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mealrecipe.R
+import com.example.mealrecipe.data.RemoteDataImpl
 import com.example.mealrecipe.databinding.ActivityMealViewBinding
-import com.example.mealrecipe.model.CategoryDetail
-import com.example.mealrecipe.model.Meal
+import com.example.mealrecipe.repository.MealRepositoryImpl
 
 class MealView : AppCompatActivity() {
     lateinit var binding: ActivityMealViewBinding
     lateinit var adapter: MealAdapter
+    private val mealViewModel: MealViewModel by viewModels{ MealViewModelFactory(
+        MealRepositoryImpl(RemoteDataImpl())
+    )}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,12 +24,12 @@ class MealView : AppCompatActivity() {
     }
 
     private fun configureMeal() {
-        val selectedCategory = intent.getParcelableExtra<CategoryDetail>("category")
         adapter = MealAdapter()
         binding.mealRecyclerView.adapter = adapter
         binding.mealRecyclerView.layoutManager = LinearLayoutManager(this)
-        Toast.makeText(this, "$selectedCategory", Toast.LENGTH_LONG).show()
 
-       // adapter.submitList()
+        mealViewModel.meal.observe(this) { mealDetail ->
+            adapter.submitList(mealDetail.meals)
+        }
     }
 }

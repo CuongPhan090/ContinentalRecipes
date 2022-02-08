@@ -1,17 +1,17 @@
 package com.example.mealrecipe.view.category
 
-import androidx.lifecycle.*
-import com.example.mealrecipe.model.Category
-import com.example.mealrecipe.network.ApiService
-import com.example.mealrecipe.repository.MealRepository
-import kotlinx.coroutines.launch
-import java.lang.IllegalArgumentException
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
+import com.example.mealrecipe.repository.MealRepositoryImpl
 
 class CategoryViewModel(
-    private val mealRepository: MealRepository
+    private val mealRepositoryImpl: MealRepositoryImpl
 ): ViewModel() {
     val category = liveData {
-        emit(mealRepository.getCategory())
+        emit(mealRepositoryImpl.getCategories())
     }
 
+    fun putCategory(category: String) = mealRepositoryImpl.putSelectedCategory(category)
+
+    fun printStack() = mealRepositoryImpl.itemStack
 }

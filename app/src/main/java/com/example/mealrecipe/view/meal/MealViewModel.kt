@@ -1,14 +1,16 @@
 package com.example.mealrecipe.view.meal
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.mealrecipe.model.MealDetail
-import com.example.mealrecipe.network.ApiService
-import kotlinx.coroutines.launch
+import androidx.lifecycle.liveData
+import com.example.mealrecipe.repository.MealRepository
+import com.example.mealrecipe.repository.MealRepositoryImpl
 
-class MealViewModel: ViewModel() {
+class MealViewModel(private val mealRepositoryImpl: MealRepositoryImpl): ViewModel() {
 
-    val mealDetail = MutableLiveData<MealDetail>()
+    private val selectedCategory = mealRepositoryImpl.getSelectedCategory()
+    val meal = liveData {
+        emit(mealRepositoryImpl.getMeals(selectedCategory))
+    }
 
+    fun printStack() = mealRepositoryImpl.itemStack
 }
