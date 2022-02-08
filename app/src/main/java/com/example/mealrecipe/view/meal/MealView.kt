@@ -7,13 +7,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mealrecipe.data.RemoteDataImpl
 import com.example.mealrecipe.databinding.ActivityMealViewBinding
 import com.example.mealrecipe.repository.MealRepositoryImpl
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class MealView : AppCompatActivity() {
+@AndroidEntryPoint
+class MealView: AppCompatActivity() {
     lateinit var binding: ActivityMealViewBinding
     lateinit var adapter: MealAdapter
-    private val mealViewModel: MealViewModel by viewModels{ MealViewModelFactory(
-        MealRepositoryImpl(RemoteDataImpl())
-    )}
+    private val mealViewModel: MealViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -3,7 +3,10 @@ package com.example.mealrecipe.repository
 import com.example.mealrecipe.data.RemoteDataImpl
 import com.example.mealrecipe.model.Category
 import com.example.mealrecipe.model.Meal
+import dagger.hilt.android.scopes.ViewModelScoped
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
 
 interface MealRepository {
     suspend fun getCategories(): Category
@@ -16,7 +19,8 @@ interface MealRepository {
     fun getSelectedMeal(): String
 }
 
-class MealRepositoryImpl(private val remoteDataImpl: RemoteDataImpl) : MealRepository {
+@Singleton
+class MealRepositoryImpl @Inject constructor (private val remoteDataImpl: RemoteDataImpl) : MealRepository {
     private val itemStack: Stack<String> = Stack()
     override suspend fun getCategories(): Category = remoteDataImpl.getCategory()
 

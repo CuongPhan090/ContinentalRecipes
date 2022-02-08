@@ -9,13 +9,14 @@ import com.example.mealrecipe.data.RemoteDataImpl
 import com.example.mealrecipe.databinding.ActivityCategoryBinding
 import com.example.mealrecipe.repository.MealRepositoryImpl
 import com.example.mealrecipe.view.meal.MealView
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class CategoryView() : AppCompatActivity() {
+@AndroidEntryPoint
+class CategoryView: AppCompatActivity() {
     lateinit var binding: ActivityCategoryBinding
     lateinit var adapter: CategoryAdapter
-    private val categoryViewModel: CategoryViewModel by viewModels { CategoryViewModelFactory(
-        MealRepositoryImpl(RemoteDataImpl())
-    ) }
+    private val categoryViewModel: CategoryViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
