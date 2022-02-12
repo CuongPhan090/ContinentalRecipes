@@ -14,5 +14,7 @@ class MealViewModel @Inject constructor(private val mealRepositoryImpl: MealRepo
         emit(mealRepositoryImpl.getMeals(selectedCategory))
     }
 
-//    fun printStack() = mealRepositoryImpl.itemStack
+    fun putSelectedMeal(selectedMeal: String) {
+        mealRepositoryImpl.putSelectedMeal(selectedMeal)
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.mealrecipe.view.meal
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mealrecipe.data.RemoteDataImpl
 import com.example.mealrecipe.databinding.ActivityMealViewBinding
 import com.example.mealrecipe.repository.MealRepositoryImpl
+import com.example.mealrecipe.view.recipe.RecipeView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -25,7 +27,10 @@ class MealView: AppCompatActivity() {
     }
 
     private fun configureMeal() {
-        adapter = MealAdapter()
+        adapter = MealAdapter {
+            mealViewModel.putSelectedMeal(it.meal)
+            startActivity(Intent(this, RecipeView::class.java))
+        }
         binding.mealRecyclerView.adapter = adapter
         binding.mealRecyclerView.layoutManager = LinearLayoutManager(this)
 

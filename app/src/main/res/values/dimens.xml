@@ -12,4 +12,10 @@
     <dimen name="card_view_margin_horizontal">10dp</dimen>
     <dimen name="card_view_margin_vertical">5dp</dimen>
     <dimen name="card_view_corner_radius">15dp</dimen>
+    <dimen name="card_view_padding">16dp</dimen>
+    <dimen name="card_view_ingredient_margin_horizontal">10dp</dimen>
+    <dimen name="card_view_recipe_margin_vertical">15dp</dimen>
+    <dimen name="recipe_thumb_margin">15dp</dimen>
+    <dimen name="ingredient_text_size">16sp</dimen>
+    <dimen name="recipe_card_view_corner_radius">5dp</dimen>
 </resources>

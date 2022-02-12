@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MealRecipe.NoActionBarAndStatusBar">
         <activity
+            android:name=".view.recipe.RecipeView"
+            android:exported="false" />
+        <activity
             android:name=".view.meal.MealView"
             android:exported="false" />
         <activity

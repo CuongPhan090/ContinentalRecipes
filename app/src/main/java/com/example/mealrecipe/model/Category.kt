@@ -5,8 +5,13 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class Category(
-    val categories: List<CategoryDetail>
-)
+    @Json(name = "categories")
+    internal val _categories: List<CategoryDetail>
+) {
+    val categories: List<CategoryDetail> by lazy {
+        _categories.filter { category -> category.isValid() }
+    }
+}
 
 @JsonClass(generateAdapter = true)
 data class CategoryDetail(
@@ -16,4 +21,8 @@ data class CategoryDetail(
     val category: String,
     @Json(name="strCategoryThumb")
     val categoryThumb: String
-)
+) {
+    fun isValid(): Boolean {
+        return id.isNotBlank() && category.isNotBlank() && categoryThumb.isNotBlank()
+    }
+}

@@ -2,6 +2,7 @@ package com.example.mealrecipe.view.category
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,8 +32,8 @@ class CategoryView: AppCompatActivity() {
             startActivity(Intent(this, MealView::class.java))
         }
 
-        binding.categoryRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.categoryRecyclerView.adapter = adapter
+        binding.categoryRecyclerView.layoutManager = LinearLayoutManager(this)
 
         categoryViewModel.category.observe(this) {
             adapter.submitList(it.categories)

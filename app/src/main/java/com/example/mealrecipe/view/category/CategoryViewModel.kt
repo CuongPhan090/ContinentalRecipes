@@ -15,6 +15,4 @@ class CategoryViewModel @Inject constructor(
     }
 
     fun putCategory(category: String) = mealRepositoryImpl.putSelectedCategory(category)
-
-//    fun printStack() = mealRepositoryImpl.itemStack
 }

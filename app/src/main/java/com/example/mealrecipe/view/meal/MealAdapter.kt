@@ -7,19 +7,30 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mealrecipe.databinding.MealViewHolderBinding
-import com.example.mealrecipe.model.Meal
 import com.example.mealrecipe.model.MealDetail
 
-class MealAdapter: ListAdapter<MealDetail, MealAdapter.MealViewHolder>(MealDetailDiffCallback()) {
+class MealAdapter(
+    val onMealClickListener: ((MealDetail) -> Unit)
+) : ListAdapter<MealDetail, MealAdapter.MealViewHolder>(MealDetailDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
-        return MealViewHolder(MealViewHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return MealViewHolder(
+            MealViewHolderBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
         holder.bind(getItem(position))
+        holder.binding.root.setOnClickListener {
+            onMealClickListener(getItem(position))
+        }
     }
 
-    inner class MealViewHolder(private val binding: MealViewHolderBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class MealViewHolder(val binding: MealViewHolderBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MealDetail) {
             binding.meal.text = item.meal
             Glide.with(binding.root)
@@ -29,8 +40,10 @@ class MealAdapter: ListAdapter<MealDetail, MealAdapter.MealViewHolder>(MealDetai
     }
 }
 
-class MealDetailDiffCallback: DiffUtil.ItemCallback<MealDetail>() {
-    override fun areItemsTheSame(oldItem: MealDetail, newItem: MealDetail) = oldItem.id == newItem.id
+class MealDetailDiffCallback : DiffUtil.ItemCallback<MealDetail>() {
+    override fun areItemsTheSame(oldItem: MealDetail, newItem: MealDetail) =
+        oldItem.id == newItem.id
+
     override fun areContentsTheSame(oldItem: MealDetail, newItem: MealDetail) = oldItem == newItem
 }
 
