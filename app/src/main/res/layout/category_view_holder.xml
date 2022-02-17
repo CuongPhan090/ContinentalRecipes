@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="250dp"
     android:layout_marginHorizontal="@dimen/card_view_margin_horizontal"
     android:layout_marginVertical="@dimen/card_view_margin_vertical"
     app:cardCornerRadius="@dimen/card_view_corner_radius">
@@ -16,7 +16,7 @@
             android:id="@+id/category_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <TextView

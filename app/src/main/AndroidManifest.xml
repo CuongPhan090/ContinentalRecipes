@@ -5,20 +5,31 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".MealApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MealRecipe.NoActionBarAndStatusBar">
+        android:theme="@style/Theme.MyApplication">
+        <activity
+            android:name=".view.favorite.FavoriteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.recipe.RecipeView"
+            android:exported="false"
+            android:parentActivityName=".view.meal.MealView" />
         <activity
             android:name=".view.meal.MealView"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:parentActivityName=".view.category.CategoryView" />
         <activity
             android:name=".view.category.CategoryView"
-            android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop" />
         <activity
-            android:name=".view.SplashScreen"
+            android:name=".view.splashscreen.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
