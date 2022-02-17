@@ -1,19 +1,15 @@
 package com.example.mealrecipe.view.recipe
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
+import com.example.mealrecipe.BaseApplication
 import com.example.mealrecipe.databinding.ActivityRecipeViewBinding
-import com.example.mealrecipe.model.Recipe
 import com.example.mealrecipe.model.RecipeDetail
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
-import kotlin.reflect.full.memberProperties
 
 @AndroidEntryPoint
-class RecipeView : AppCompatActivity() {
+class RecipeView : BaseApplication() {
     lateinit var binding: ActivityRecipeViewBinding
     private val viewModel: RecipeViewModel by viewModels()
 
@@ -22,6 +18,7 @@ class RecipeView : AppCompatActivity() {
         binding = ActivityRecipeViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        createToolbar()
         configureRecipe()
     }
 

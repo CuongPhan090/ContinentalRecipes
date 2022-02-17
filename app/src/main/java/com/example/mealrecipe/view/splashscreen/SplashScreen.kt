@@ -4,11 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mealrecipe.BaseApplication
 import com.example.mealrecipe.databinding.ActivitySplashScreenBinding
 import com.example.mealrecipe.view.category.CategoryView
 
 @SuppressLint("CustomSplashScreen")
-class SplashScreen : AppCompatActivity() {
+class SplashScreen : BaseApplication() {
     lateinit var binding: ActivitySplashScreenBinding
 //    lateinit var executorService: ScheduledExecutorService
 

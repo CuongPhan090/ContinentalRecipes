@@ -9,9 +9,9 @@ import com.bumptech.glide.Glide
 import com.example.mealrecipe.databinding.CategoryViewHolderBinding
 import com.example.mealrecipe.model.CategoryDetail
 
-class CategoryAdapter(
-    val onCategoryClickListener: (CategoryDetail) -> Unit,
-) : ListAdapter<CategoryDetail, CategoryAdapter.CategoryViewHolder>(CategoryDiffCallback()) {
+class CategoryAdapter: ListAdapter<CategoryDetail, CategoryAdapter.CategoryViewHolder>(CategoryDiffCallback()) {
+
+    var onCategoryClickListener: (CategoryDetail) -> Unit = { _: CategoryDetail -> }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         return CategoryViewHolder(

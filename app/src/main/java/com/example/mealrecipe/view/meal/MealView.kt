@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mealrecipe.BaseApplication
 import com.example.mealrecipe.data.RemoteDataImpl
 import com.example.mealrecipe.databinding.ActivityMealViewBinding
 import com.example.mealrecipe.repository.MealRepositoryImpl
@@ -13,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MealView: AppCompatActivity() {
+class MealView: BaseApplication() {
     lateinit var binding: ActivityMealViewBinding
     lateinit var adapter: MealAdapter
     private val mealViewModel: MealViewModel by viewModels()
@@ -23,8 +24,11 @@ class MealView: AppCompatActivity() {
         binding = ActivityMealViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        createToolbar()
+        title = mealViewModel.selectedCategory
         configureMeal()
     }
+
 
     private fun configureMeal() {
         adapter = MealAdapter {

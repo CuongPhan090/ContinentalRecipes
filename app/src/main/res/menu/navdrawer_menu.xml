@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/group_divider1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_recipes"
+            android:icon="@drawable/ic_recipe_book"
+            android:title="@string/recipes" />
+
+        <item
+            android:id="@+id/menu_favourites"
+            android:icon="@drawable/ic_favorite"
+            android:title="@string/favorite" />
+    </group>
+
+    <group
+        android:id="@+id/group_divider2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_rate"
+            android:icon="@drawable/ic_rate"
+            android:title="@string/rate" />
+
+        <item
+            android:id="@+id/menu_shared"
+            android:icon="@drawable/ic_share"
+            android:title="@string/share" />
+    </group>
+
+    <group
+        android:id="@+id/group_divider3"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_about"
+            android:icon="@drawable/ic_about"
+            android:title="@string/about" />
+    </group>
+</menu>

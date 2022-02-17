@@ -15,14 +15,19 @@ interface MealRepository {
     suspend fun getRecipe(selectedMeal: String): Recipe
 
     fun putSelectedCategory(selectedCategory: String)
-    fun getSelectedCategory(): String
     fun putSelectedMeal(selectedMeal: String)
+    fun putFavoriteMeal(selectedMeal: Meal)
+    fun getSelectedCategory(): String
     fun getSelectedMeal(): String
+    fun getFavoriteMeal(): List<Meal>
+    fun removeFavoriteMeal(selectedMeal: Meal)
 }
 
 @Singleton
 class MealRepositoryImpl @Inject constructor (private val remoteDataImpl: RemoteDataImpl) : MealRepository {
     private val itemStack: Stack<String> = Stack()
+    private val favoriteMeals = mutableListOf<Meal>()
+
     override suspend fun getCategories(): Category = remoteDataImpl.getCategory()
 
     override suspend fun getMeals(selectedCategory: String): Meal =
@@ -35,15 +40,12 @@ class MealRepositoryImpl @Inject constructor (private val remoteDataImpl: Remote
         itemStack.push(selectedCategory)
     }
 
-    override fun getSelectedCategory(): String {
-        if (itemStack.isEmpty()) {
-            return ""
-        }
-        return itemStack.pop()
-    }
-
     override fun putSelectedMeal(selectedMeal: String) {
         itemStack.push(selectedMeal)
+    }
+
+    override fun putFavoriteMeal(selectedMeal: Meal) {
+        favoriteMeals.add(selectedMeal)
     }
 
     override fun getSelectedMeal(): String {
@@ -51,5 +53,20 @@ class MealRepositoryImpl @Inject constructor (private val remoteDataImpl: Remote
             return ""
         }
         return itemStack.pop()
+    }
+
+    override fun getSelectedCategory(): String {
+        if (itemStack.isEmpty()) {
+            return ""
+        }
+        return itemStack.pop()
+    }
+
+    override fun getFavoriteMeal(): List<Meal> {
+        return favoriteMeals
+    }
+
+    override fun removeFavoriteMeal(selectedMeal: Meal) {
+        favoriteMeals.remove(selectedMeal)
     }
 }
