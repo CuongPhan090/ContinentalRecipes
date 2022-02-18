@@ -17,17 +17,35 @@
             android:layout_height="wrap_content"
             tools:context=".view.recipe.RecipeView">
 
-            <ImageView
-                android:id="@+id/recipe_thumb"
+            <FrameLayout
+                android:id="@+id/frameLayout"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@android:color/darker_gray"
-                android:importantForAccessibility="no"
-                android:scaleType="fitXY"
                 app:layout_constraintDimensionRatio="16:12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/recipe_thumb"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="30dp"
+                    android:background="@android:color/darker_gray"
+                    android:importantForAccessibility="no"
+                    android:scaleType="fitXY" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_favorite_recipe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="@dimen/favorite_fab_end_margin"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_favorite"
+                    app:backgroundTint="@color/cardview_dark_background" />
+
+            </FrameLayout>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/ingredient_card_view"
@@ -35,10 +53,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/card_view_ingredient_margin_horizontal"
                 android:layout_marginVertical="@dimen/card_view_recipe_margin_vertical"
+                app:cardBackgroundColor="@color/cardview_dark_background"
                 app:cardCornerRadius="@dimen/recipe_card_view_corner_radius"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recipe_thumb">
+                app:layout_constraintTop_toBottomOf="@+id/frameLayout">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -109,5 +128,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
+
 
 </ScrollView>

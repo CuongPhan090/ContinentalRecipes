@@ -9,7 +9,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoriteActivityViewModel @Inject constructor(private val mealRepositoryImpl: MealRepositoryImpl): ViewModel() {
 
-    val favoriteMeal = liveData {
-        emit(mealRepositoryImpl.getFavoriteMeal())
+    val favoriteMeals = liveData {
+        emit(mealRepositoryImpl.getFavoriteMeals())
     }
 }
