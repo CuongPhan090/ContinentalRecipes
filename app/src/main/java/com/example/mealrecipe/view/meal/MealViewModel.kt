@@ -9,12 +9,12 @@ import javax.inject.Inject
 @HiltViewModel
 class MealViewModel @Inject constructor(private val mealRepositoryImpl: MealRepositoryImpl): ViewModel() {
 
-    val selectedCategory = mealRepositoryImpl.getSelectedCategory()
-    val meal = liveData {
-        emit(mealRepositoryImpl.getMeals(selectedCategory))
+    val selectedCategoryName = mealRepositoryImpl.getSelectedCategoryName()
+    val mealData = liveData {
+        emit(mealRepositoryImpl.getMeals(selectedCategoryName))
     }
 
-    fun putSelectedMeal(selectedMeal: String) {
-        mealRepositoryImpl.putSelectedMeal(selectedMeal)
+    fun putSelectedMealName(selectedMealName: String) {
+        mealRepositoryImpl.putSelectedMealName(selectedMealName)
     }
 }

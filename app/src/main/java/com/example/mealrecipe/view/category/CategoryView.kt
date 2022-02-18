@@ -5,12 +5,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.view.MenuItem
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.mealrecipe.BaseApplication
 import com.example.mealrecipe.R
 import com.example.mealrecipe.databinding.ActivityCategoryBinding
@@ -104,13 +102,13 @@ class CategoryView : BaseApplication() {
         val recyclerView = binding.categoryRecyclerView
         adapter = CategoryAdapter()
         adapter.onCategoryClickListener = { categoryDetail ->
-            categoryViewModel.putCategory(categoryDetail.category)
+            categoryViewModel.putCategoryName(categoryDetail.category)
             startActivity(Intent(this, MealView::class.java)) }
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        categoryViewModel.category.observe(this) {
+        categoryViewModel.categoryData.observe(this) {
             adapter.submitList(it.categories)
         }
     }

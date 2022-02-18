@@ -32,7 +32,7 @@ class MealAdapter(
     inner class MealViewHolder(val binding: MealViewHolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MealDetail) {
-            binding.meal.text = item.meal
+            binding.mealTitle.text = item.meal
             Glide.with(binding.root)
                 .load(item.mealThumb)
                 .into(binding.mealBackground)

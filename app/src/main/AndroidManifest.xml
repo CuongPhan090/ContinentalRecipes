@@ -14,7 +14,8 @@
         android:theme="@style/Theme.MyApplication">
         <activity
             android:name=".view.favorite.FavoriteActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".view.category.CategoryView" />
         <activity
             android:name=".view.recipe.RecipeView"
             android:exported="false"

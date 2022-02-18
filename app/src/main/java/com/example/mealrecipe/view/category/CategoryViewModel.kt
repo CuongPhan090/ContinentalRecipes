@@ -10,9 +10,9 @@ import javax.inject.Inject
 class CategoryViewModel @Inject constructor(
     private val mealRepositoryImpl: MealRepositoryImpl
 ): ViewModel() {
-    val category = liveData {
+    val categoryData = liveData {
         emit(mealRepositoryImpl.getCategories())
     }
 
-    fun putCategory(category: String) = mealRepositoryImpl.putSelectedCategory(category)
+    fun putCategoryName(categoryName: String) = mealRepositoryImpl.putSelectedCategoryName(categoryName)
 }

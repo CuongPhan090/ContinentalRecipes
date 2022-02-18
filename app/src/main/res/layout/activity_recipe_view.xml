@@ -42,7 +42,7 @@
                     android:layout_gravity="bottom|end"
                     android:layout_marginEnd="@dimen/favorite_fab_end_margin"
                     android:importantForAccessibility="no"
-                    android:src="@drawable/ic_favorite"
+                    android:src="@drawable/ic_hollow_favorite"
                     app:backgroundTint="@color/cardview_dark_background" />
 
             </FrameLayout>

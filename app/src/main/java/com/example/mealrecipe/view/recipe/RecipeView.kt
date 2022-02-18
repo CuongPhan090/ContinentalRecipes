@@ -2,8 +2,10 @@ package com.example.mealrecipe.view.recipe
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.content.res.AppCompatResources
 import com.bumptech.glide.Glide
 import com.example.mealrecipe.BaseApplication
+import com.example.mealrecipe.R
 import com.example.mealrecipe.databinding.ActivityRecipeViewBinding
 import com.example.mealrecipe.model.RecipeDetail
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,10 +22,24 @@ class RecipeView : BaseApplication() {
 
         createToolbar()
         configureRecipe()
+        addToFavoriteList()
+    }
+
+    private fun addToFavoriteList() {
+        var isFabClicked: Boolean = false
+        binding.fabFavoriteRecipe.setOnClickListener{
+            if (!isFabClicked) {
+                isFabClicked = true
+                binding.fabFavoriteRecipe.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.ic_dense_favorite))
+            } else {
+                isFabClicked = false
+                binding.fabFavoriteRecipe.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.ic_hollow_favorite))
+            }
+        }
     }
 
     private fun configureRecipe() {
-        viewModel.recipe.observe(this) { recipe ->
+        viewModel.recipeData.observe(this) { recipe ->
             val recipeDetail = recipe.recipeDetail[0]
             title = recipeDetail.name
             binding.instructionDetails.text = recipeDetail.instruction

@@ -7,9 +7,13 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoriteActivityViewModel @Inject constructor(private val mealRepositoryImpl: MealRepositoryImpl): ViewModel() {
+class FavoriteViewModel @Inject constructor(private val mealRepositoryImpl: MealRepositoryImpl): ViewModel() {
 
     val favoriteMeals = liveData {
         emit(mealRepositoryImpl.getFavoriteMeals())
+    }
+
+    fun putSelectedMealName(selectedMealName: String) {
+        mealRepositoryImpl.putSelectedMealName(selectedMealName)
     }
 }
