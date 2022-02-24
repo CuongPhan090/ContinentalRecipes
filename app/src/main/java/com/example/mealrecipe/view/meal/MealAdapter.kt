@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mealrecipe.databinding.MealViewHolderBinding
-import com.example.mealrecipe.model.MealDetail
+import com.example.mealrecipe.model.Meal
 
 class MealAdapter(
-    val onMealClickListener: ((MealDetail) -> Unit)
-) : ListAdapter<MealDetail, MealAdapter.MealViewHolder>(MealDetailDiffCallback()) {
+    val onMealClickListener: ((Meal) -> Unit)
+) : ListAdapter<Meal, MealAdapter.MealViewHolder>(MealDetailDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
         return MealViewHolder(
             MealViewHolderBinding.inflate(
@@ -31,7 +31,7 @@ class MealAdapter(
 
     inner class MealViewHolder(val binding: MealViewHolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: MealDetail) {
+        fun bind(item: Meal) {
             binding.mealTitle.text = item.meal
             Glide.with(binding.root)
                 .load(item.mealThumb)
@@ -40,10 +40,10 @@ class MealAdapter(
     }
 }
 
-class MealDetailDiffCallback : DiffUtil.ItemCallback<MealDetail>() {
-    override fun areItemsTheSame(oldItem: MealDetail, newItem: MealDetail) =
+class MealDetailDiffCallback : DiffUtil.ItemCallback<Meal>() {
+    override fun areItemsTheSame(oldItem: Meal, newItem: Meal) =
         oldItem.id == newItem.id
 
-    override fun areContentsTheSame(oldItem: MealDetail, newItem: MealDetail) = oldItem == newItem
+    override fun areContentsTheSame(oldItem: Meal, newItem: Meal) = oldItem == newItem
 }
 

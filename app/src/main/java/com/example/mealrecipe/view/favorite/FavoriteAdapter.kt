@@ -6,26 +6,27 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.mealrecipe.data.local.MealEntity
 import com.example.mealrecipe.databinding.FavoriteViewHolderBinding
-import com.example.mealrecipe.model.MealDetail
 
-class FavoriteAdapter: ListAdapter<MealDetail, FavoriteAdapter.FavoriteViewHolder>(FavoriteMealDiffCallBack()) {
+class FavoriteAdapter: ListAdapter<MealEntity, FavoriteAdapter.FavoriteViewHolder>(FavoriteMealDiffCallBack()) {
 
-    var onItemClickedListener: ((MealDetail) -> Unit) = {}
+    var onItemClickedListener: ((MealEntity) -> Unit) = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         return FavoriteViewHolder(FavoriteViewHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val item = getItem(position)
+        holder.bind(item)
         holder.binding.root.setOnClickListener{
-            onItemClickedListener(getItem(position))
+            onItemClickedListener(item)
         }
     }
 
     inner class FavoriteViewHolder(val binding: FavoriteViewHolderBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(mealDetails: MealDetail) {
+        fun bind(mealDetails: MealEntity) {
             binding.favoriteMealTitle.text = mealDetails.meal
             Glide.with(binding.root)
                 .load(mealDetails.mealThumb)
@@ -34,8 +35,8 @@ class FavoriteAdapter: ListAdapter<MealDetail, FavoriteAdapter.FavoriteViewHolde
     }
 }
 
-class FavoriteMealDiffCallBack: DiffUtil.ItemCallback<MealDetail>() {
-    override fun areItemsTheSame(oldItem: MealDetail, newItem: MealDetail): Boolean = oldItem.id == newItem.id
-    override fun areContentsTheSame(oldItem: MealDetail, newItem: MealDetail): Boolean = oldItem == newItem
+class FavoriteMealDiffCallBack: DiffUtil.ItemCallback<MealEntity>() {
+    override fun areItemsTheSame(oldItem: MealEntity, newItem: MealEntity): Boolean = oldItem.meal == newItem.meal
+    override fun areContentsTheSame(oldItem: MealEntity, newItem: MealEntity): Boolean = oldItem == newItem
 
 }

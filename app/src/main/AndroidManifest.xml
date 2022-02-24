@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".view.favorite.FavoriteActivity"
+            android:name=".view.favorite.FavoriteView"
             android:exported="false"
             android:parentActivityName=".view.category.CategoryView" />
         <activity

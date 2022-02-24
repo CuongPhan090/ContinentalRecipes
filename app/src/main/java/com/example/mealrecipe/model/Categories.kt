@@ -4,17 +4,17 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class Category(
+data class Categories(
     @Json(name = "categories")
-    internal val _categories: List<CategoryDetail>
+    internal val _categories: List<Category>
 ) {
-    val categories: List<CategoryDetail> by lazy {
+    val categories: List<Category> by lazy {
         _categories.filter { category -> category.isValid() }
     }
 }
 
 @JsonClass(generateAdapter = true)
-data class CategoryDetail(
+data class Category(
     @Json(name="idCategory")
     val id: String,
     @Json(name="strCategory")

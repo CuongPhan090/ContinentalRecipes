@@ -4,14 +4,14 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class Meal(
-    val meals: List<MealDetail>
+data class Meals(
+    val meals: List<Meal>
 )
 
 @JsonClass(generateAdapter = true)
-data class MealDetail(
+data class Meal(
     @Json(name = "idMeal")
-    val id: String,
+    val id: String = "",
     @Json(name = "strMeal")
     val meal: String,
     @Json(name = "strMealThumb")

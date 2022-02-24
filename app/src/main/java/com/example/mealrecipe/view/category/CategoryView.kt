@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mealrecipe.BaseApplication
 import com.example.mealrecipe.R
 import com.example.mealrecipe.databinding.ActivityCategoryBinding
-import com.example.mealrecipe.view.favorite.FavoriteActivity
+import com.example.mealrecipe.view.favorite.FavoriteView
 import com.example.mealrecipe.view.meal.MealView
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,7 +64,7 @@ class CategoryView : BaseApplication() {
     private fun onNavigationItemSelected(itemId: Int) {
         when (itemId) {
             R.id.menu_recipes -> startActivity(Intent(baseContext, CategoryView::class.java))
-            R.id.menu_favourites -> startActivity(Intent(baseContext, FavoriteActivity::class.java))
+            R.id.menu_favourites -> startActivity(Intent(baseContext, FavoriteView::class.java))
             R.id.menu_rate ->
                 startActivity(
                     Intent(

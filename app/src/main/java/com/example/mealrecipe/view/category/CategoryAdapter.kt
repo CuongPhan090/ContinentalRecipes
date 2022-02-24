@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mealrecipe.databinding.CategoryViewHolderBinding
-import com.example.mealrecipe.model.CategoryDetail
+import com.example.mealrecipe.model.Category
 
-class CategoryAdapter: ListAdapter<CategoryDetail, CategoryAdapter.CategoryViewHolder>(CategoryDiffCallback()) {
+class CategoryAdapter: ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(CategoryDiffCallback()) {
 
-    var onCategoryClickListener: (CategoryDetail) -> Unit = { _: CategoryDetail -> }
+    var onCategoryClickListener: (Category) -> Unit = { _: Category -> }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         return CategoryViewHolder(
@@ -32,7 +32,7 @@ class CategoryAdapter: ListAdapter<CategoryDetail, CategoryAdapter.CategoryViewH
 
     inner class CategoryViewHolder(val binding: CategoryViewHolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: CategoryDetail) {
+        fun bind(item: Category) {
             binding.category.text = item.category
             Glide.with(binding.root)
                 .load(item.categoryThumb)
@@ -43,7 +43,7 @@ class CategoryAdapter: ListAdapter<CategoryDetail, CategoryAdapter.CategoryViewH
 
 }
 
-class CategoryDiffCallback : DiffUtil.ItemCallback<CategoryDetail>() {
-    override fun areItemsTheSame(oldItem: CategoryDetail, newItem: CategoryDetail) = oldItem.id == newItem.id
-    override fun areContentsTheSame(oldItem: CategoryDetail, newItem: CategoryDetail) = oldItem == newItem
+class CategoryDiffCallback : DiffUtil.ItemCallback<Category>() {
+    override fun areItemsTheSame(oldItem: Category, newItem: Category) = oldItem.id == newItem.id
+    override fun areContentsTheSame(oldItem: Category, newItem: Category) = oldItem == newItem
 }

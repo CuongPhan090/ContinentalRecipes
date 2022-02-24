@@ -6,14 +6,19 @@ import androidx.appcompat.content.res.AppCompatResources
 import com.bumptech.glide.Glide
 import com.example.mealrecipe.BaseApplication
 import com.example.mealrecipe.R
+import com.example.mealrecipe.data.local.MealEntity
 import com.example.mealrecipe.databinding.ActivityRecipeViewBinding
-import com.example.mealrecipe.model.RecipeDetail
+import com.example.mealrecipe.model.Recipe
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RecipeView : BaseApplication() {
     lateinit var binding: ActivityRecipeViewBinding
     private val viewModel: RecipeViewModel by viewModels()
+    lateinit var mealEntity: MealEntity
+    lateinit var recipeDetail: Recipe
+    lateinit var mealEntityList: List<MealEntity>
+    var mealUId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,31 +26,73 @@ class RecipeView : BaseApplication() {
         setContentView(binding.root)
 
         createToolbar()
+        updateFavoriteMeal()
         configureRecipe()
         addToFavoriteList()
     }
 
     private fun addToFavoriteList() {
-        var isFabClicked: Boolean = false
-        binding.fabFavoriteRecipe.setOnClickListener{
-            if (!isFabClicked) {
-                isFabClicked = true
-                binding.fabFavoriteRecipe.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.ic_dense_favorite))
+        binding.fabFavoriteRecipe.setOnClickListener {
+            if (!isFavorite()) {
+                binding.fabFavoriteRecipe.setImageDrawable(
+                    AppCompatResources.getDrawable(
+                        this,
+                        R.drawable.ic_dense_favorite
+                    )
+                )
+                viewModel.addFavoriteMeal(mealEntity)
             } else {
-                isFabClicked = false
-                binding.fabFavoriteRecipe.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.ic_hollow_favorite))
+                binding.fabFavoriteRecipe.setImageDrawable(
+                    AppCompatResources.getDrawable(
+                        this,
+                        R.drawable.ic_hollow_favorite
+                    )
+                )
+                viewModel.deleteFavoriteMeal(mealEntity)
+            }
+        }
+    }
+
+    private fun updateFavoriteMeal() {
+        viewModel.favoriteMeals.observe(this) {
+            mealEntityList = it
+            if (this::mealEntity.isInitialized) {
+                mealEntity.id = getMealId()
             }
         }
     }
 
     private fun configureRecipe() {
         viewModel.recipeData.observe(this) { recipe ->
-            val recipeDetail = recipe.recipeDetail[0]
+            recipeDetail = recipe.recipe[0]
             title = recipeDetail.name
-            binding.instructionDetails.text = recipeDetail.instruction
-
             recipeDetail.thumb?.let { loadThumb(it) }
+            binding.instructionDetails.text = recipeDetail.instruction
             binding.ingredientDetails.text = loadIngredients(recipeDetail)
+
+            mealEntity =
+                MealEntity(
+                    mealUId,
+                    meal = recipeDetail.name ?: "",
+                    mealThumb = recipeDetail.thumb ?: ""
+                )
+            mealEntity.id = getMealId()
+
+            if (isFavorite()) {
+                binding.fabFavoriteRecipe.setImageDrawable(
+                    AppCompatResources.getDrawable(
+                        this,
+                        R.drawable.ic_dense_favorite
+                    )
+                )
+            } else {
+                binding.fabFavoriteRecipe.setImageDrawable(
+                    AppCompatResources.getDrawable(
+                        this,
+                        R.drawable.ic_hollow_favorite
+                    )
+                )
+            }
         }
     }
 
@@ -55,37 +102,55 @@ class RecipeView : BaseApplication() {
             .into(binding.recipeThumb)
     }
 
-    private fun loadIngredients(recipeDetail: RecipeDetail): String {
+    private fun loadIngredients(recipe: Recipe): String {
         val ingredientAndMeasurement = mapOf(
-            recipeDetail.strIngredient1 to recipeDetail.strMeasure1,
-            recipeDetail.strIngredient2 to recipeDetail.strMeasure2,
-            recipeDetail.strIngredient3 to recipeDetail.strMeasure3,
-            recipeDetail.strIngredient4 to recipeDetail.strMeasure4,
-            recipeDetail.strIngredient5 to recipeDetail.strMeasure5,
-            recipeDetail.strIngredient6 to recipeDetail.strMeasure6,
-            recipeDetail.strIngredient7 to recipeDetail.strMeasure7,
-            recipeDetail.strIngredient8 to recipeDetail.strMeasure8,
-            recipeDetail.strIngredient9 to recipeDetail.strMeasure9,
-            recipeDetail.strIngredient10 to recipeDetail.strMeasure10,
-            recipeDetail.strIngredient11 to recipeDetail.strMeasure11,
-            recipeDetail.strIngredient12 to recipeDetail.strMeasure12,
-            recipeDetail.strIngredient13 to recipeDetail.strMeasure13,
-            recipeDetail.strIngredient14 to recipeDetail.strMeasure14,
-            recipeDetail.strIngredient15 to recipeDetail.strMeasure15,
-            recipeDetail.strIngredient16 to recipeDetail.strMeasure16,
-            recipeDetail.strIngredient17 to recipeDetail.strMeasure17,
-            recipeDetail.strIngredient18 to recipeDetail.strMeasure18,
-            recipeDetail.strIngredient19 to recipeDetail.strMeasure19,
-            recipeDetail.strIngredient20 to recipeDetail.strMeasure20,
+            recipe.strIngredient1 to recipe.strMeasure1,
+            recipe.strIngredient2 to recipe.strMeasure2,
+            recipe.strIngredient3 to recipe.strMeasure3,
+            recipe.strIngredient4 to recipe.strMeasure4,
+            recipe.strIngredient5 to recipe.strMeasure5,
+            recipe.strIngredient6 to recipe.strMeasure6,
+            recipe.strIngredient7 to recipe.strMeasure7,
+            recipe.strIngredient8 to recipe.strMeasure8,
+            recipe.strIngredient9 to recipe.strMeasure9,
+            recipe.strIngredient10 to recipe.strMeasure10,
+            recipe.strIngredient11 to recipe.strMeasure11,
+            recipe.strIngredient12 to recipe.strMeasure12,
+            recipe.strIngredient13 to recipe.strMeasure13,
+            recipe.strIngredient14 to recipe.strMeasure14,
+            recipe.strIngredient15 to recipe.strMeasure15,
+            recipe.strIngredient16 to recipe.strMeasure16,
+            recipe.strIngredient17 to recipe.strMeasure17,
+            recipe.strIngredient18 to recipe.strMeasure18,
+            recipe.strIngredient19 to recipe.strMeasure19,
+            recipe.strIngredient20 to recipe.strMeasure20,
         )
 
         var ingredients = ""
-        for (pair  in ingredientAndMeasurement.entries) {
+        for (pair in ingredientAndMeasurement.entries) {
             if (pair.key.isNullOrEmpty()) {
                 break
             }
             ingredients += "${pair.value} ${pair.key}  \n"
         }
         return ingredients
+    }
+
+    private fun isFavorite(): Boolean {
+        mealEntityList.forEach {
+            if (it.meal == recipeDetail.name) {
+                return true
+            }
+        }
+        return false
+    }
+
+    private fun getMealId(): Int {
+        mealEntityList.forEach {
+            if (it.meal == recipeDetail.name) {
+                return it.id
+            }
+        }
+        return 0
     }
 }

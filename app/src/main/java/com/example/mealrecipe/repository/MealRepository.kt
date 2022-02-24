@@ -1,18 +1,19 @@
 package com.example.mealrecipe.repository
 
-import com.example.mealrecipe.data.RemoteDataImpl
-import com.example.mealrecipe.model.Category
-import com.example.mealrecipe.model.Meal
-import com.example.mealrecipe.model.MealDetail
-import com.example.mealrecipe.model.Recipe
-import java.util.*
+import androidx.lifecycle.LiveData
+import com.example.mealrecipe.data.remote.RemoteDataImpl
+import com.example.mealrecipe.data.local.LocalDataImpl
+import com.example.mealrecipe.data.local.MealEntity
+import com.example.mealrecipe.model.Categories
+import com.example.mealrecipe.model.Meals
+import com.example.mealrecipe.model.Recipes
 import javax.inject.Inject
 import javax.inject.Singleton
 
 interface MealRepository {
-    suspend fun getCategories(): Category
-    suspend fun getMeals(selectedCategory: String): Meal
-    suspend fun getRecipe(selectedMeal: String): Recipe
+    suspend fun getCategories(): Categories
+    suspend fun getMeals(selectedCategory: String): Meals
+    suspend fun getRecipe(selectedMeal: String): Recipes
 
     fun putSelectedCategoryName(selectedCategoryName: String)
     fun getSelectedCategoryName(): String
@@ -20,46 +21,48 @@ interface MealRepository {
     fun putSelectedMealName(selectedMealName: String)
     fun getSelectedMealName(): String
 
-    fun putFavoriteMeal(selectedMeal: MealDetail)
-    fun getFavoriteMeals(): List<MealDetail>
-    fun removeFavoriteMeal(selectedMeal: MealDetail)
+    suspend fun putFavoriteMeal(selectedMeal: MealEntity)
+    fun getFavoriteMeals(): LiveData<List<MealEntity>>
+    suspend fun deleteFavoriteMeal(selectedMeal: MealEntity)
 }
 
 @Singleton
-class MealRepositoryImpl @Inject constructor (private val remoteDataImpl: RemoteDataImpl) : MealRepository {
-    // favorite meal will be saved in ROOM
-    private val favoriteMeals = mutableListOf<MealDetail>()
-
+class MealRepositoryImpl @Inject constructor(
+    private val remoteDataImpl: RemoteDataImpl,
+    private val localDataImpl: LocalDataImpl
+) : MealRepository {
     private val itemClickedMap = mutableMapOf<String, String>()
 
-    override suspend fun getCategories(): Category = remoteDataImpl.getCategory()
+    override suspend fun getCategories(): Categories = remoteDataImpl.getCategory()
 
-    override suspend fun getMeals(selectedCategory: String): Meal =
+    override suspend fun getMeals(selectedCategory: String): Meals =
         remoteDataImpl.getMeal(selectedCategory)
 
-    override suspend fun getRecipe(selectedMeal: String): Recipe =
+    override suspend fun getRecipe(selectedMeal: String): Recipes =
         remoteDataImpl.getRecipe(selectedMeal)
 
     override fun putSelectedCategoryName(selectedCategoryName: String) {
         itemClickedMap["selectedCategoryName"] = selectedCategoryName
     }
-    override fun getSelectedCategoryName(): String = itemClickedMap.getOrDefault("selectedCategoryName", "")
+
+    override fun getSelectedCategoryName(): String =
+        itemClickedMap.getOrDefault("selectedCategoryName", "")
 
     override fun putSelectedMealName(selectedMealName: String) {
         itemClickedMap["selectedMealName"] = selectedMealName
     }
+
     override fun getSelectedMealName(): String = itemClickedMap.getOrDefault("selectedMealName", "")
 
-    // favorite meal will be saved in ROOM
-    override fun putFavoriteMeal(selectedMeal: MealDetail) {
-        favoriteMeals.add(selectedMeal)
+    override suspend fun putFavoriteMeal(selectedMeal: MealEntity) {
+        localDataImpl.insertMeal(selectedMeal)
     }
 
-    override fun getFavoriteMeals(): List<MealDetail> {
-        return favoriteMeals
+    override fun getFavoriteMeals(): LiveData<List<MealEntity>> {
+        return localDataImpl.getAllMeals()
     }
 
-    override fun removeFavoriteMeal(selectedMeal: MealDetail) {
-        favoriteMeals.remove(selectedMeal)
+    override suspend fun deleteFavoriteMeal(selectedMeal: MealEntity) {
+        localDataImpl.deleteMeal(selectedMeal)
     }
 }
