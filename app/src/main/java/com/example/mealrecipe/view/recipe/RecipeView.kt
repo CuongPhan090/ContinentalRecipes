@@ -1,6 +1,10 @@
 package com.example.mealrecipe.view.recipe
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.content.res.AppCompatResources
 import com.bumptech.glide.Glide
@@ -29,6 +33,19 @@ class RecipeView : BaseApplication() {
         updateFavoriteMeal()
         configureRecipe()
         addToFavoriteList()
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.help_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.help) {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(recipeDetail.youtube)))
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun addToFavoriteList() {
