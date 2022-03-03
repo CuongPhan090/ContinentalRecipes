@@ -26,6 +26,7 @@
         android:layout_marginStart="@dimen/button_left_margin"
         android:layout_marginEnd="@dimen/button_right_margin"
         android:layout_marginBottom="@dimen/button_bottom_margin"
+        android:visibility="gone"
         android:background="@drawable/round_corner_button"
         android:text="@string/tap_to_continue"
         android:textColor="@color/white"
