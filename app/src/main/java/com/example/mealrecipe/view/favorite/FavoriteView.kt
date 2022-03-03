@@ -2,6 +2,7 @@ package com.example.mealrecipe.view.favorite
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mealrecipe.BaseApplication
@@ -33,6 +34,7 @@ class FavoriteView : BaseApplication() {
     }
 
     private fun configureFavorite() {
+        binding.shimmerLayout.startShimmer()
         val recyclerView = binding.favoriteRecyclerView
         adapter = FavoriteAdapter()
         recyclerView.adapter = adapter
@@ -40,6 +42,8 @@ class FavoriteView : BaseApplication() {
 
         favoriteViewModel.favoriteMeals.observe(this) {
             adapter.submitList(it)
+            binding.shimmerLayout.stopShimmer()
+            binding.shimmerLayout.visibility = View.GONE
         }
     }
 }

@@ -38,5 +38,4 @@ class FavoriteAdapter: ListAdapter<MealEntity, FavoriteAdapter.FavoriteViewHolde
 class FavoriteMealDiffCallBack: DiffUtil.ItemCallback<MealEntity>() {
     override fun areItemsTheSame(oldItem: MealEntity, newItem: MealEntity): Boolean = oldItem.meal == newItem.meal
     override fun areContentsTheSame(oldItem: MealEntity, newItem: MealEntity): Boolean = oldItem == newItem
-
 }

@@ -31,4 +31,5 @@
         app:headerLayout="@layout/navdrawer_header"
         app:itemShapeFillColor="@color/screen_background"
         app:menu="@menu/navdrawer_menu" />
+
 </androidx.drawerlayout.widget.DrawerLayout>

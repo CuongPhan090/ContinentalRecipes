@@ -12,6 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:shimmer_repeat_mode="restart"
+            app:shimmer_shape="linear">
+
+            <include layout="@layout/meal_view_holder_skeleton" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <ImageView
             android:id="@+id/meal_background"
             android:layout_width="match_parent"
@@ -23,6 +33,7 @@
             android:id="@+id/meal_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@color/white"

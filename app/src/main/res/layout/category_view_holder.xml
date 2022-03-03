@@ -12,6 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:shimmer_repeat_mode="restart"
+            app:shimmer_shape="linear">
+
+            <include layout="@layout/category_view_holder_skeleton" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <ImageView
             android:id="@+id/category_background"
             android:layout_width="match_parent"
@@ -26,7 +36,9 @@
             android:layout_gravity="center"
             android:textColor="@color/white"
             android:textSize="@dimen/category_name"
+            android:visibility="gone"
             android:textStyle="bold"
             tools:text="Beef" />
+
     </FrameLayout>
 </androidx.cardview.widget.CardView>
