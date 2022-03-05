@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mealrecipe">
+    package="com.example.continentalrecipes">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".MealApplication"
+        android:name="com.example.continentalrecipes.MealApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,24 +13,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".view.favorite.FavoriteView"
+            android:name="com.example.continentalrecipes.view.favorite.FavoriteView"
             android:exported="false"
-            android:parentActivityName=".view.category.CategoryView" />
+            android:parentActivityName="com.example.continentalrecipes.view.category.CategoryView" />
         <activity
-            android:name=".view.recipe.RecipeView"
+            android:name="com.example.continentalrecipes.view.recipe.RecipeView"
             android:exported="false"
-            android:parentActivityName=".view.meal.MealView" />
+            android:parentActivityName="com.example.continentalrecipes.view.meal.MealView" />
         <activity
-            android:name=".view.meal.MealView"
+            android:name="com.example.continentalrecipes.view.meal.MealView"
             android:exported="false"
             android:launchMode="singleTop"
-            android:parentActivityName=".view.category.CategoryView" />
+            android:parentActivityName="com.example.continentalrecipes.view.category.CategoryView" />
         <activity
-            android:name=".view.category.CategoryView"
+            android:name="com.example.continentalrecipes.view.category.CategoryView"
             android:exported="false"
             android:launchMode="singleTop" />
         <activity
-            android:name=".view.splashscreen.SplashScreen"
+            android:name="com.example.continentalrecipes.view.splashscreen.SplashScreen"
             android:noHistory="true"
             android:exported="true">
             <intent-filter>
