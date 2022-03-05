@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="200dp"
     android:layout_marginHorizontal="@dimen/card_view_margin_horizontal"
     android:layout_marginVertical="@dimen/card_view_margin_vertical"
     app:cardCornerRadius="@dimen/card_view_corner_radius">
@@ -12,33 +12,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmer_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:shimmer_repeat_mode="restart"
-            app:shimmer_shape="linear">
-
-            <include layout="@layout/category_view_holder_skeleton" />
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
         <ImageView
-            android:id="@+id/category_background"
+            android:id="@+id/favorite_meal_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <TextView
-            android:id="@+id/category"
+            android:id="@+id/favorite_meal_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center"
             android:textColor="@color/white"
             android:textSize="@dimen/category_name"
-            android:visibility="gone"
             android:textStyle="bold"
-            tools:text="Beef" />
-
+            tools:text="Lamb tomato and sweet spices" />
     </FrameLayout>
 </androidx.cardview.widget.CardView>
