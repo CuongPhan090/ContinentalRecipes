@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp"
+    android:transitionName="category_transition"
     android:layout_marginHorizontal="@dimen/card_view_margin_horizontal"
     android:layout_marginVertical="@dimen/card_view_margin_vertical"
     app:cardCornerRadius="@dimen/card_view_corner_radius">
@@ -26,6 +27,7 @@
             android:id="@+id/meal_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:transitionName="transition"
             android:scaleType="centerCrop"
             tools:src="@tools:sample/backgrounds/scenic" />
 

@@ -1,14 +1,18 @@
 package com.example.continentalrecipes.view.category
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.GravityCompat
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.continentalrecipes.BaseApplication
 import com.example.continentalrecipes.R
@@ -105,7 +109,8 @@ class CategoryView : BaseApplication() {
         adapter = CategoryAdapter()
         adapter.onCategoryClickListener = { categoryDetail ->
             categoryViewModel.putCategoryName(categoryDetail.category)
-            startActivity(Intent(this, MealView::class.java)) }
+            startActivity(Intent(this, MealView::class.java))
+        }
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
