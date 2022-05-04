@@ -55,6 +55,7 @@ class CategoryView : BaseApplication() {
             R.string.close_drawer
         )
 
+        //
         // pass the Open and Close toggle for the drawer layout listener
         // to toggle the button
         binding.drawerLayout.addDrawerListener(actionBarDrawerToggle)
