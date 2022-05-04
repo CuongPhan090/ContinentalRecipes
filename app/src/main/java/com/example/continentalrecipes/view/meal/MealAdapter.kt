@@ -16,7 +16,7 @@ import com.example.continentalrecipes.databinding.MealViewHolderBinding
 import com.example.continentalrecipes.model.Meal
 
 class MealAdapter(
-    val onMealClickListener: ((Meal) -> Unit)
+    val onMealClickListener: ((Meal, View, String) -> Unit)
 ) : ListAdapter<Meal, MealAdapter.MealViewHolder>(MealDetailDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
         return MealViewHolder(
@@ -29,17 +29,18 @@ class MealAdapter(
     }
 
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
-        holder.bind(getItem(position))
-        holder.binding.root.setOnClickListener {
-            onMealClickListener(getItem(position))
-        }
+        holder.bind(getItem(position), onMealClickListener)
     }
 
     inner class MealViewHolder(val binding: MealViewHolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Meal) {
+        fun bind(item: Meal, mealClickListener: (Meal, View, String) -> Unit) {
             binding.mealTitle.text = item.meal
             binding.shimmerLayout.startShimmer()
+
+            itemView.setOnClickListener{
+                mealClickListener(item, binding.mealBackground, "transition")
+            }
 
             Glide.with(binding.root)
                 .load(item.mealThumb)

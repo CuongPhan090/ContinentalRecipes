@@ -34,7 +34,8 @@
                     android:layout_marginBottom="30dp"
                     android:background="@android:color/darker_gray"
                     android:importantForAccessibility="no"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    android:transitionName="transition" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fab_favorite_recipe"

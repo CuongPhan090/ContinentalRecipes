@@ -3,7 +3,12 @@ package com.example.continentalrecipes.view.meal
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.ChangeBounds
+import androidx.transition.ChangeTransform
+import androidx.transition.Fade
+import androidx.transition.TransitionSet
 import com.example.continentalrecipes.BaseApplication
 import com.example.continentalrecipes.databinding.ActivityMealViewBinding
 import com.example.continentalrecipes.view.recipe.RecipeView
@@ -27,15 +32,23 @@ class MealView: BaseApplication() {
 
 
     private fun configureMeal() {
-        adapter = MealAdapter {
-            mealViewModel.putSelectedMealName(it.meal)
-            startActivity(Intent(this, RecipeView::class.java))
+        adapter = MealAdapter { selectedMeal, view, transitionName ->
+            mealViewModel.putSelectedMealName(selectedMeal.meal)
+            val options: ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, transitionName)
+            startActivity(Intent(this, RecipeView::class.java), options.toBundle())
         }
         binding.mealRecyclerView.adapter = adapter
         binding.mealRecyclerView.layoutManager = LinearLayoutManager(this)
 
         mealViewModel.mealData.observe(this) { mealDetail ->
             adapter.submitList(mealDetail.meals)
+        }
+    }
+
+    private class FormTransition: TransitionSet() {
+        init {
+            ordering = ORDERING_TOGETHER
+            addTransition(ChangeBounds()).addTransition(ChangeTransform())
         }
     }
 }
